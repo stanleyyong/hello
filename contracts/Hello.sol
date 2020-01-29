@@ -14,6 +14,10 @@ contract Hello {
 		int annualincome;
 		string verificationstatus; //{Not verified, verified, source verified}
 		bytes8 zipcode;
+		//state abbreviations in the US are in two letters, but we are aiming to save space here by storing as two bytes
+		//For this purpose we will use the mapping from the state abbreviations to a 2 digit space
+		//USHCN 2-digit State Codes
+		//https://cdiac.ess-dive.lbl.gov/climate/temp/us_recordtemps/states.html
 		bytes2 addrstate;
 		string employmenttitle;
 		uint ficorangelow;
@@ -109,5 +113,5 @@ contract Hello {
 	function sayHello() public view returns (string memory, string memory){
 		return ("Hello my name is: ", name);
 	}
-	//a comment
+	//a comment to be updated
 }
