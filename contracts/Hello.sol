@@ -9,7 +9,7 @@ contract Hello {
 
 	//declares a struct that represents a loan
 	struct Borrower{
-		bytes32 borrowerid;
+		uint borrowerid;
 		Homeownership homeownership;
 		int annualincome;
 		string verificationstatus; //{Not verified, verified, source verified}
@@ -27,7 +27,7 @@ contract Hello {
 
 	struct Loan{
 		uint loanid;
-		bytes32 borrowerid;
+		uint borrowerid;
 		Loanstatus loanstatus;
 		Loanterm loanterm;
 		int loanamt;
@@ -37,13 +37,13 @@ contract Hello {
 	}
 
 	mapping (uint => Loan) loansbook;
-	mapping (bytes32 => Borrower) borrowers;
+	mapping (uint => Borrower) borrowers;
 
 	uint[] public loanids;
-	bytes32[] public borrowerids;
+	uint[] public borrowerids;
 
 	function setBorrower(
-		bytes32 _borrowerid, 
+		uint _borrowerid, 
 		Homeownership _homeownership, 
 		int _annualincome, 
 		string memory _verificationstatus,
@@ -67,7 +67,7 @@ contract Hello {
 		borrowerids.push(_borrowerid)-1;
 	}
 
-	function setLoan(uint _loanid, bytes32 _borrowerid, Loanstatus _loanstatus, Loanterm _loanterm, int _loanamt, int _interestratebasispoints, int _installment) public {
+	function setLoan(uint _loanid, uint _borrowerid, Loanstatus _loanstatus, Loanterm _loanterm, int _loanamt, int _interestratebasispoints, int _installment) public {
 		Loan storage loan = loansbook[_loanid]; //have to be explicit about storage vs memory location, loans have to be persistent hence kept in "storage"
 		loan.loanid = _loanid;
 		loan.borrowerid = _borrowerid;
@@ -78,6 +78,10 @@ contract Hello {
 		loan.installment = _installment;
 		loan.isValue = true;
 		loanids.push(_loanid) - 1;
+	}
+
+	function getBorrowers() view public returns(uint[] memory){//have to be explicit in returning a clone of the borrower array through memory instead of storage
+		return borrowerids;
 	}
 
 	function getLoans() view public returns(uint[] memory){//have to be explicit in returning a clone of the loansid array through memory instead of storage
