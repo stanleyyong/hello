@@ -42,6 +42,7 @@ contract Hello {
 	uint[] public loanids;
 	uint[] public borrowerids;
 
+	//this creates new borrower records which are populated via data that's taken from a subset of columns in the CSV from LendingClub
 	function setBorrower(
 		uint _borrowerid, 
 		Homeownership _homeownership, 
@@ -67,7 +68,16 @@ contract Hello {
 		borrowerids.push(_borrowerid)-1;
 	}
 
-	function setLoan(uint _loanid, uint _borrowerid, Loanstatus _loanstatus, Loanterm _loanterm, int _loanamt, int _interestratebasispoints, int _installment) public {
+	//this creates new loan records which are populated via data that's taken from a subset of columns in the CSV from LendingClub
+	function setLoan(
+		uint _loanid, 
+		uint _borrowerid, 
+		Loanstatus _loanstatus, 
+		Loanterm _loanterm, 
+		int _loanamt, 
+		int _interestratebasispoints, 
+		int _installment
+	) public {
 		Loan storage loan = loansbook[_loanid]; //have to be explicit about storage vs memory location, loans have to be persistent hence kept in "storage"
 		loan.loanid = _loanid;
 		loan.borrowerid = _borrowerid;

@@ -24,6 +24,24 @@ truffle(ganache)> bor[1].toNumber()
 
 truffle(ganache)> let cal = await instance.getBorrower(bor[1].toNumber())
 undefined
+
+truffle(ganache)> let loanx = await instance.getLoanEconomics(loans[0].toNumber())
+undefined
+truffle(ganache)> loanx[3]
+BN {
+  negative: 0,
+  words: [ 239, <1 empty item> ],
+  length: 1,
+  red: null
+}
+truffle(ganache)> loanx[3].toNumber()
+239
+truffle(ganache)> loanx[2].toNumber()
+1524
+truffle(ganache)> loanx[1].toNumber()
+10000
+truffle(ganache)> loanx[0].toNumber()
+159210254
 ```
 
 BN is a BigNumber in Solidity. We have access to functions such as ```toString(10)```, ```toNumber()``` etc.
