@@ -34,7 +34,9 @@ var tra = {
 //Contract.methods.setName("OUE Downtown").send({from:account}).then(console.log);
 //generate ids web3.fromAscii("20160528")
 //Contract.methods.setBorrower(localweb3.utils.fromAscii("30012020-001"),0,120000,"verified",'0x00061820','0x11',"Director",600,700).send({from:account}).then(console.log);
-var id_1 = 30012020;
-Contract.methods.setBorrower(311,0,80000,"verified",'0x00061820','0x11',"Software engineer",500,600).send({from:account,gas:249669}).then(console.log);
+var id_1 = 30012020001;
+var id_2 = 30012020002;
+Contract.methods.setBorrower(id_1,0,30000,"verified",'0x00054800','0x47',"Banquet Server",775,779).send({from:account,gas:249669}).then(console.log);
+Contract.methods.setBorrower(id_2,0,115000,"verified",'0x00075000','0x41',"Chief Advisor Litigation Tech Unit",680,684).send({from:account,gas:249669}).then(console.log);
 
 
