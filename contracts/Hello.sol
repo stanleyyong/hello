@@ -80,15 +80,30 @@ contract Hello {
 		loanids.push(_loanid) - 1;
 	}
 
-
-	function getBorrower(uint _bid) view public returns(Homeownership,int,string memory){
+	//As Solidity does not implement structs as objects and only supports them as loose bags of variables
+	//we have to return multiple values in the function
+	function getBorrower(uint _bid) view public returns(
+												Homeownership homeownership,
+												int annualincome,
+												string memory verificationstatus, 
+												string memory title, 
+												uint ficolow, 
+												uint ficohigh){
 		if(borrowers[_bid].isValue){
-			return(borrowers[_bid].homeownership, borrowers[_bid].annualincome, borrowers[_bid].verificationstatus);
+			return(
+				borrowers[_bid].homeownership, 
+				borrowers[_bid].annualincome, 
+				borrowers[_bid].verificationstatus, 
+				borrowers[_bid].employmenttitle, 
+				borrowers[_bid].ficorangelow,
+				borrowers[_bid].ficorangehigh
+				);
 		}else{
-			return(Homeownership.unknown, -1, "unknown");
+			return(Homeownership.unknown, -1, "null","null",0,0);
 		}
 	}
 
+	//This appears to be the only consistent way to access the ids of the borrowers
 	function getBorrowers() view public returns(uint[] memory){//have to be explicit in returning a clone of the borrower array through memory instead of storage
 		return borrowerids;
 	}
