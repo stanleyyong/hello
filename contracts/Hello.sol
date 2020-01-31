@@ -2,7 +2,7 @@ pragma solidity ^0.5.1;
 
 contract Hello {
 
-	enum Homeownership {own, mortgage, rent}
+	enum Homeownership {own, mortgage, rent, unknown}
 	enum Loanstatus {current, fullypaid, late16to30, late31to120, graceperiod}
 	enum Loanterm {m36, m60}
 	enum LoanPurpose{car, creditcard, debtconsolidation, homeimprovement, medical, house, majorpurchase, renewableenergy, smallbusiness, vacation}
@@ -78,6 +78,15 @@ contract Hello {
 		loan.installment = _installment;
 		loan.isValue = true;
 		loanids.push(_loanid) - 1;
+	}
+
+
+	function getBorrower(uint _bid) view public returns(Homeownership,int,string memory){
+		if(borrowers[_bid].isValue){
+			return(borrowers[_bid].homeownership, borrowers[_bid].annualincome, borrowers[_bid].verificationstatus);
+		}else{
+			return(Homeownership.unknown, -1, "unknown");
+		}
 	}
 
 	function getBorrowers() view public returns(uint[] memory){//have to be explicit in returning a clone of the borrower array through memory instead of storage
